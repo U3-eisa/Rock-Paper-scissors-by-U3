@@ -1,0 +1,49 @@
+body {
+  background-color: rgb(25, 25, 25);
+  color: white;
+  font-family: arial;
+}
+.cont {
+  display: flex;
+  flex-direction: column;
+}
+h1,
+h2,
+h3,
+h4 {
+  text-align: center;
+  font-size: 35px;
+  font-weight: bold;
+}
+.title {
+  display: block;
+}
+.rock {
+  display: flex;
+  justify-content: space-around;
+}
+.emoji {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid white;
+  height: 120px;
+  width: 120px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  border-radius: 50%;
+  font-size: 50px;
+  cursor: pointer;
+}
+.rest-button {
+  background-color: rgba(25, 25, 25, 0);
+  border: 2px solid white;
+  height: 50px;
+  width: 120px;
+  color: white;
+  font-weight: bold;
+  font-size: larger;
+  cursor: pointer;
+}
+.rest-div {
+  display: flex;
+  justify-content: center;
+}
