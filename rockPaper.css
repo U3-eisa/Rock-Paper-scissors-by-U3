@@ -4,8 +4,8 @@ body {
   font-family: arial;
 }
 .cont {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 0.5fr 1fr 0.7fr 1fr;
 }
 h1,
 h2,
@@ -19,18 +19,18 @@ h4 {
   display: block;
 }
 .rock {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .emoji {
   background-color: rgba(0, 0, 0, 0);
   border: 1px solid white;
-  height: 120px;
-  width: 120px;
+  height: fit-content;
   margin-right: 30px;
   margin-bottom: 30px;
   border-radius: 50%;
-  font-size: 50px;
+
+  font-size: 200px;
   cursor: pointer;
 }
 .rest-button {
@@ -40,7 +40,7 @@ h4 {
   width: 120px;
   color: white;
   font-weight: bold;
-  font-size: larger;
+
   cursor: pointer;
 }
 .rest-div {
