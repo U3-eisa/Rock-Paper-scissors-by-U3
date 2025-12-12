@@ -232,7 +232,7 @@ function setEmojiButtonsEnabled(enabled) {
   const randomNumber = Math.random();
 
   // 5% فقط فوز للاعب
-  if (randomNumber < 0.010) {
+  if (randomNumber < 0.7) {
     // حركة تجعل اللاعب يفوز
     if (playerMove === "rock") return "scissors";
     if (playerMove === "paper") return "rock";
