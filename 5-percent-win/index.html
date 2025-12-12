@@ -68,6 +68,10 @@
         ties: 0,
       };
       console.log("5-percent-win version running ✅");
+      document.addEventListener("dblclick", function (e) {
+  e.preventDefault();
+}, { passive: false });
+
       updateScoreElement();
       function playGame(playerMove) {
        const Cm = pickcomputermove(playerMove);
