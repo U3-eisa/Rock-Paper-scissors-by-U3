@@ -266,7 +266,7 @@ if (!gameLocked && badLuckCounter > 0 && badLuckCounter % 10 === 0) {
   const randomNumber = Math.random();
 
   // 5% فقط فوز للاعب
-  if (randomNumber < 0.015) {
+  if (randomNumber < 0.7) {
     // حركة تجعل اللاعب يفوز
     if (playerMove === "rock") return "scissors";
     if (playerMove === "paper") return "rock";
