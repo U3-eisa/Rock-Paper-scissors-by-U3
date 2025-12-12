@@ -73,29 +73,39 @@
         ties: 0,
       };
       console.log("5-percent-win version running ✅");
-      function showTip(msg) {
+     function showTip(msg) {
   const tip = document.querySelector(".js-tip");
+  if (!tip) return;
+
   tip.textContent = msg;
-  tip.classList.add("show");
+  tip.style.opacity = "1";
 
   clearTimeout(window.__tipTimer);
   window.__tipTimer = setTimeout(() => {
-    tip.classList.remove("show");
-  }, 1500);
+    tip.style.opacity = "0";
+  }, 2000);
 }
 
-// دبل تاب في أي مكان = تظهر رسالة (ويمنع الزوم)
+// دبل كليك بمهلة ثانيتين
 let lastTap = 0;
-document.addEventListener("touchend", function (e) {
-  const now = Date.now();
-  if (now - lastTap < 300) {
-    e.preventDefault(); // يمنع double-tap zoom
-    showTip("مستعجل لاحق شنو؟ اضغط وحدة وحدة");
-    // أو بالإنجليزي:
-    // showTip("Why are you rushing? 😄");
-  }
-  lastTap = now;
-}, { passive: false });
+const DOUBLE_TAP_DELAY = 2000; // ← ثانيتين
+
+document.addEventListener(
+  "touchend",
+  function (e) {
+    const now = Date.now();
+
+    if (now - lastTap <= DOUBLE_TAP_DELAY) {
+      e.preventDefault(); // يمنع الزوم
+      showTip("ليش مستعجل؟ 😄");
+      lastTap = 0; // نعيد التهيئة
+    } else {
+      lastTap = now;
+    }
+  },
+  { passive: false }
+);
+
 
 
 
