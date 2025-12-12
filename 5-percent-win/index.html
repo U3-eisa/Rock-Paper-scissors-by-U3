@@ -81,6 +81,8 @@ const cooldownFill = document.getElementById("cooldownFill");
 let cooldownTimer = null;
 
 function startCooldownBar() {
+  document.querySelector(".cooldown-bar")?.classList.remove("done");
+
   if (!cooldownFill) return;
 
   clearInterval(cooldownTimer);
@@ -93,6 +95,10 @@ function startCooldownBar() {
     cooldownFill.style.width = pct + "%";
 
     if (pct >= 100) {
+       if (!cooldownFill) return;
+
+      document.querySelector(".cooldown-bar")?.classList.add("done");
+
       clearInterval(cooldownTimer);
       cooldownTimer = null;
     }
