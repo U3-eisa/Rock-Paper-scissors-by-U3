@@ -134,7 +134,7 @@ h4 {
 .win-overlay{
   position: fixed;
   inset: 0;
-  background: rgba(0, 180, 0, 0.95);
+  background: rgba(0, 126, 0, 0.95);
   display: none;
   align-items: center;
   justify-content: center;
