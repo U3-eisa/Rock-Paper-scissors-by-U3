@@ -1,3 +1,15 @@
+
+html, body {
+  touch-action: manipulation;
+}
+
+button, .emoji {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 body {
   background-color: rgb(25, 25, 25);
   color: white;
@@ -47,3 +59,4 @@ h4 {
   display: flex;
   justify-content: center;
 }
+
