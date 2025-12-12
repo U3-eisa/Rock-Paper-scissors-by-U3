@@ -105,7 +105,7 @@ function setEmojiButtonsEnabled(enabled) {
 
       updateScoreElement();
       function playGame(playerMove) {
-        const now = Date.now();
+  const now = Date.now();
 
   // لو لسه في فترة القفل: ما تلعب، بس ورّي رسالة
   if (now < cooldownUntil) {
@@ -115,51 +115,34 @@ function setEmojiButtonsEnabled(enabled) {
 
   // ابدأ قفل جديد لمدة ثانيتين
   cooldownUntil = now + COOLDOWN_MS;
-  setEmojiButtonsEnabled(false);
-  setTimeout(() => setEmojiButtonsEnabled(true), COOLDOWN_MS);
-       const Cm = pickcomputermove(playerMove);
 
-        console.log(Cm);
-        result = "";
-        if (playerMove === "scissors") {
-          if (Cm === "rock") {
-            result = "You lose";
-          } else if (Cm === "paper") {
-            result = "You win";
-          } else if (Cm === "scissors") {
-            result = "tie";
-          }
-        } else if (playerMove === "paper") {
-          if (Cm === "rock") {
-            result = "You win";
-          } else if (Cm === "paper") {
-            result = "tie";
-          } else if (Cm === "scissors") {
-            result = "You lose";
-          }
-        } else if (playerMove === "rock") {
-          if (Cm === "rock") {
-            result = "tie";
-          } else if (Cm === "paper") {
-            result = "You lose";
-          } else if (Cm === "scissors") {
-            result = "You win";
-          }
-        }
-        if (result === "You win") {
-          score.win += 1;
-        } else if (result === "You lose") {
-          score.losses += 1;
-        } else if (result === "tie") {
-          score.ties += 1;
-        }
-        updateScoreElement();
-        localStorage.setItem("score", JSON.stringify(score));
-        document.querySelector(".js-result").innerHTML = `${result}.`;
-        document.querySelector(
-          ".js-moves"
-        ).innerHTML = `You ${playerMove} - ${Cm} Computer`;
-      }
+  const Cm = pickcomputermove(playerMove);
+
+  let result = "";
+  if (playerMove === "scissors") {
+    if (Cm === "rock") result = "You lose";
+    else if (Cm === "paper") result = "You win";
+    else result = "tie";
+  } else if (playerMove === "paper") {
+    if (Cm === "rock") result = "You win";
+    else if (Cm === "paper") result = "tie";
+    else result = "You lose";
+  } else if (playerMove === "rock") {
+    if (Cm === "rock") result = "tie";
+    else if (Cm === "paper") result = "You lose";
+    else result = "You win";
+  }
+
+  if (result === "You win") score.win += 1;
+  else if (result === "You lose") score.losses += 1;
+  else score.ties += 1;
+
+  updateScoreElement();
+  localStorage.setItem("score", JSON.stringify(score));
+  document.querySelector(".js-result").innerHTML = `${result}.`;
+  document.querySelector(".js-moves").innerHTML = `You ${playerMove} - ${Cm} Computer`;
+}
+
       function updateScoreElement() {
         document.querySelector(
           ".js-score"
