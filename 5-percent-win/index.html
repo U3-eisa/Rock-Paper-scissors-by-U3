@@ -72,19 +72,30 @@
         ties: 0,
       };
       console.log("5-percent-win version running ✅");
-      let lastTouchEnd = 0;
+      function showTip(msg) {
+  const tip = document.querySelector(".js-tip");
+  tip.textContent = msg;
+  tip.classList.add("show");
 
-document.addEventListener(
-  "touchend",
-  function (e) {
-    const now = Date.now();
-    if (now - lastTouchEnd <= 300) {
-      e.preventDefault(); // يمنع double-tap zoom
-    }
-    lastTouchEnd = now;
-  },
-  { passive: false }
-);
+  clearTimeout(window.__tipTimer);
+  window.__tipTimer = setTimeout(() => {
+    tip.classList.remove("show");
+  }, 1500);
+}
+
+// دبل تاب في أي مكان = تظهر رسالة (ويمنع الزوم)
+let lastTap = 0;
+document.addEventListener("touchend", function (e) {
+  const now = Date.now();
+  if (now - lastTap < 300) {
+    e.preventDefault(); // يمنع double-tap zoom
+    showTip("ليش مستعجل؟ 😄");
+    // أو بالإنجليزي:
+    // showTip("Why are you rushing? 😄");
+  }
+  lastTap = now;
+}, { passive: false });
+
 
 
       updateScoreElement();
