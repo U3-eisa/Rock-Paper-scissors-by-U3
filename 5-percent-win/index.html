@@ -83,14 +83,14 @@
 </div>
 
 
-    <script>
+   <script>
 
-      let score =  {
+let score = {
         win: 0,
         losses: 0,
         ties: 0,
       };
-      
+
       let badLuckCounter = 0; // خسارة + تعادل
 
       let suppressHurryUntil = 0; // يمنع رسالة الاستعجال لفترة قصيرة بعد رسائل الحظ
@@ -250,12 +250,21 @@ if (!gameLocked && badLuckCounter > 0 && badLuckCounter % 10 === 0) {
 }
 
 
+function moveToEmoji(move) {
+  if (move === "rock") return "✊";
+  if (move === "paper") return "🖐";
+  if (move === "scissors") return "✌";
+  return "";
+}
+
+
   updateScoreElement();
   localStorage.setItem("score", JSON.stringify(score));
 
   document.querySelector(".js-result").innerHTML = `${result}.`;
   document.querySelector(".js-moves").innerHTML =
-    `You ${playerMove} - ${Cm} Computer`;
+  `You ${moveToEmoji(playerMove)}  -  ${moveToEmoji(Cm)} Bot`;
+
 }
 
 
@@ -269,7 +278,7 @@ if (!gameLocked && badLuckCounter > 0 && badLuckCounter % 10 === 0) {
   const randomNumber = Math.random();
 
   // 5% فقط فوز للاعب
-  if (randomNumber < 0.05) {
+  if (randomNumber < 0.1) {
     // حركة تجعل اللاعب يفوز
     if (playerMove === "rock") return "scissors";
     if (playerMove === "paper") return "rock";
