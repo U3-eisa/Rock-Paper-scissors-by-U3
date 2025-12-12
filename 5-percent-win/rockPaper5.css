@@ -71,6 +71,18 @@ h4 {
   text-align: center;
   margin: 10px 0;
 }
+.js-tip{
+  text-align: center;
+  margin-top: 12px;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.js-tip.show{
+  opacity: 1;
+}
+
 
 /* زر Reset */
 .rest-div {
