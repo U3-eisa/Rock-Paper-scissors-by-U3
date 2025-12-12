@@ -84,9 +84,11 @@
 
 
     <script>
+      let badLuckCounter = 0; // خسارة + تعادل
 
-let lastPlayTime = 0;
-const COOLDOWN_MS = 1000;
+
+      let lastPlayTime = 0;
+     const COOLDOWN_MS = 1000;
 let gameLocked = false; 
 
 const cooldownFill = document.getElementById("cooldownFill");
@@ -200,18 +202,34 @@ function setEmojiButtonsEnabled(enabled) {
   }
 
   // تحديث السكور
-  if (result === "You win") {
-    score.win += 1;
+ // تحديث السكور + عداد سوء الحظ
+if (result === "You win") {
+  score.win += 1;
 
-    // ✅ أول فوز = قفل نهائي + شاشة خضراء
-    gameLocked = true;
-    showWinOverlay(); // تعرض الشاشة الخضراء (زرها يوديك للرابط)
+  // ✅ فوز: صفّر عداد سوء الحظ
+  badLuckCounter = 0;
 
-  } else if (result === "You lose") {
-    score.losses += 1;
-  } else {
-    score.ties += 1;
-  }
+  // ✅ أول فوز = قفل نهائي + شاشة خضراء
+  gameLocked = true;
+  showWinOverlay();
+
+} else if (result === "You lose") {
+  score.losses += 1;
+
+  // ❌ خسارة: زوّد عداد سوء الحظ
+  badLuckCounter += 1;
+
+} else { // tie
+  score.ties += 1;
+
+  // ❌ تعادل: زوّد عداد سوء الحظ
+  badLuckCounter += 1;
+}
+
+// 🔔 كل 10 محاولات بدون فوز
+if (!gameLocked && badLuckCounter > 0 && badLuckCounter % 10 === 0) {
+  showTip("حظك سيء 😅");
+}
 
   updateScoreElement();
   localStorage.setItem("score", JSON.stringify(score));
