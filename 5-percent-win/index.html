@@ -140,17 +140,28 @@ function setEmojiButtonsEnabled(enabled) {
 }
       updateScoreElement();
 
+
+      function setCooldownVisual(isOn) {
+  document.querySelectorAll(".emoji").forEach(btn => {
+    btn.classList.toggle("cooldown", isOn);
+  });
+}
+
       
-     function playGame(playerMove) {
+   function playGame(playerMove) {
   const now = Date.now();
   const elapsed = now - lastPlayTime;
 
   if (elapsed < COOLDOWN_MS) {
     showTip("مستعجل لاحق شنو؟ وحدة وحدة");
+    setCooldownVisual(true);
     return;
   }
 
   lastPlayTime = now;
+  setCooldownVisual(true);
+  setTimeout(() => setCooldownVisual(false), COOLDOWN_MS);
+
   startCooldownBar();
 
   const Cm = pickcomputermove(playerMove);
@@ -179,6 +190,7 @@ function setEmojiButtonsEnabled(enabled) {
   document.querySelector(".js-result").innerHTML = `${result}.`;
   document.querySelector(".js-moves").innerHTML = `You ${playerMove} - ${Cm} Computer`;
 }
+
 
       function updateScoreElement() {
         document.querySelector(
