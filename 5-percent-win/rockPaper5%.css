@@ -1,0 +1,93 @@
+/* إعدادات عامة */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(25, 25, 25);
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* الحاوية الرئيسية */
+.cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* العنوان */
+h1,
+h2,
+h3,
+h4 {
+  text-align: center;
+  font-weight: bold;
+  font-size: clamp(22px, 5vw, 35px);
+  margin: 10px 0;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+/* حاوية الأزرار */
+.rock {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* أزرار الإيموجي */
+.emoji {
+  background-color: transparent;
+  border: 2px solid white;
+
+  width: min(28vw, 140px);
+  height: min(28vw, 140px);
+
+  border-radius: 40px;
+  font-size: clamp(40px, 9vw, 60px);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* منع مشاكل الموبايل */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* النصوص */
+.text {
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* زر Reset */
+.rest-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.rest-button {
+  background-color: transparent;
+  border: 2px solid white;
+  height: 50px;
+  width: 120px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+
+  touch-action: manipulation;
+}
