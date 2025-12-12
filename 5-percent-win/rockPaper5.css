@@ -107,6 +107,8 @@ h4 {
   opacity: 0.45;
 }
 
+.cooldown-bar { opacity: 1; transition: opacity 0.3s ease; }
+.cooldown-bar.done { opacity: 0.35; }
 
 
 
