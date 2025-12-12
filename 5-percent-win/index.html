@@ -79,17 +79,20 @@
 });
 
       
-     function showTip(msg) {
- let cooldownUntil = 0;
+    let cooldownUntil = 0;
 const COOLDOWN_MS = 2000;
 
 function showTip(msg) {
   const tip = document.querySelector(".js-tip");
   if (!tip) return;
+
   tip.textContent = msg;
-  tip.style.opacity = "1";
+  tip.classList.add("show");
+
   clearTimeout(window.__tipTimer);
-  window.__tipTimer = setTimeout(() => tip.style.opacity = "0", 1200);
+  window.__tipTimer = setTimeout(() => {
+    tip.classList.remove("show");
+  }, 1200);
 }
 
 function setEmojiButtonsEnabled(enabled) {
@@ -98,24 +101,22 @@ function setEmojiButtonsEnabled(enabled) {
   });
 }
 
-function playGame(playerMove) {
-  const now = Date.now();
 
+
+      updateScoreElement();
+      function playGame(playerMove) {
+        const now = Date.now();
+
+  // لو لسه في فترة القفل: ما تلعب، بس ورّي رسالة
   if (now < cooldownUntil) {
     showTip("ليش مستعجل؟ 😄");
     return;
   }
 
+  // ابدأ قفل جديد لمدة ثانيتين
   cooldownUntil = now + COOLDOWN_MS;
   setEmojiButtonsEnabled(false);
   setTimeout(() => setEmojiButtonsEnabled(true), COOLDOWN_MS);
-
-  
-}
-
-
-      updateScoreElement();
-      function playGame(playerMove) {
        const Cm = pickcomputermove(playerMove);
 
         console.log(Cm);
