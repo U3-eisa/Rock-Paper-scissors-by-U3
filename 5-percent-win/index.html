@@ -109,7 +109,12 @@ function setEmojiButtonsEnabled(enabled) {
 
   // لو لسه في فترة القفل: ما تلعب، بس ورّي رسالة
   if (now < cooldownUntil) {
-    showTip("ليش مستعجل؟ 😄");
+    showTip("😒😒 مستعجل لاحق شنو؟ اضغط مرة كل ثانيتين ");
+    document.querySelectorAll(".emoji").forEach(b => b.classList.add("cooldown"));
+setTimeout(() => {
+  document.querySelectorAll(".emoji").forEach(b => b.classList.remove("cooldown"));
+}, COOLDOWN_MS);
+
     return;
   }
 
