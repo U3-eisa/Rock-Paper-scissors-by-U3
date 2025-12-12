@@ -73,40 +73,45 @@
         ties: 0,
       };
       console.log("5-percent-win version running ✅");
+
+      document.querySelectorAll(".emoji").forEach(btn => {
+  btn.addEventListener("dblclick", (e) => e.preventDefault());
+});
+
+      
      function showTip(msg) {
+ let cooldownUntil = 0;
+const COOLDOWN_MS = 2000;
+
+function showTip(msg) {
   const tip = document.querySelector(".js-tip");
   if (!tip) return;
-
   tip.textContent = msg;
   tip.style.opacity = "1";
-
   clearTimeout(window.__tipTimer);
-  window.__tipTimer = setTimeout(() => {
-    tip.style.opacity = "0";
-  }, 2000);
+  window.__tipTimer = setTimeout(() => tip.style.opacity = "0", 1200);
 }
 
-// دبل كليك بمهلة ثانيتين
-let lastTap = 0;
-const DOUBLE_TAP_DELAY = 2000; // ← ثانيتين
+function setEmojiButtonsEnabled(enabled) {
+  document.querySelectorAll(".emoji").forEach(btn => {
+    btn.disabled = !enabled;
+  });
+}
 
-document.addEventListener(
-  "touchend",
-  function (e) {
-    const now = Date.now();
+function playGame(playerMove) {
+  const now = Date.now();
 
-    if (now - lastTap <= DOUBLE_TAP_DELAY) {
-      e.preventDefault(); // يمنع الزوم
-      showTip("ليش مستعجل؟ 😄");
-      lastTap = 0; // نعيد التهيئة
-    } else {
-      lastTap = now;
-    }
-  },
-  { passive: false }
-);
+  if (now < cooldownUntil) {
+    showTip("ليش مستعجل؟ 😄");
+    return;
+  }
 
+  cooldownUntil = now + COOLDOWN_MS;
+  setEmojiButtonsEnabled(false);
+  setTimeout(() => setEmojiButtonsEnabled(true), COOLDOWN_MS);
 
+  
+}
 
 
       updateScoreElement();
