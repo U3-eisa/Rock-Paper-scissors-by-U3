@@ -100,24 +100,27 @@ function setEmojiButtonsEnabled(enabled) {
     btn.disabled = !enabled;
   });
 }
-
-
-
       updateScoreElement();
-      function playGame(playerMove) {
+
+      
+     function playGame(playerMove) {
   const now = Date.now();
 
-  // لو لسه في فترة القفل: ما تلعب، بس ورّي رسالة
-  if (now < cooldownUntil) {
-    showTip("مستعجل لاحق شنو؟ وحدة وحدة ");
-    document.querySelectorAll(".emoji").forEach(b => b.classList.add("cooldown"));
-setTimeout(() => {
-  document.querySelectorAll(".emoji").forEach(b => b.classList.remove("cooldown"));
-}, COOLDOWN_MS);
+  // الزمن المنقضي منذ آخر لعبة صحيحة
+  const elapsed = now - lastPlayTime;
 
+  // لو ما كملت الثانيتين
+  if (elapsed < COOLDOWN_MS) {
+    showTip("مستعجل لاحق شنو؟ وحدة وحدة");
     return;
   }
 
+  // سجل وقت اللعبة الصحيحة
+  lastPlayTime = now;
+
+  // تأثير بصري اختياري
+  setCooldownVisual(true);
+  setTimeout(() => setCooldownVisual(false), COOLDOWN_MS);
   // ابدأ قفل جديد لمدة ثانيتين
   cooldownUntil = now + COOLDOWN_MS;
 
